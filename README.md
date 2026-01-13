@@ -1,0 +1,1 @@
+The Ripple Project is a student-led initiative created by Liam Meier and Kyle Sacks to raise awareness and support for rhabdomyosarcoma and pediatric cancer care. Inspired by personal family experiences with cancer, the project aims to turn small actions into meaningful impact through education, fundraising, and community outreach.
