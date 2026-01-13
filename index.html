@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Ripple Project | Rhabdomyosarcoma Awareness</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#121b2e;
+      --text:#e8eefc;
+      --muted:#b7c4e5;
+      --accent:#6aa7ff;
+      --accent2:#7cf0d6;
+      --border:rgba(255,255,255,0.10);
+      --shadow:0 10px 25px rgba(0,0,0,.35);
+      --radius:18px;
+      --max:1100px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(106,167,255,.22), transparent 60%),
+        radial-gradient(1200px 700px at 90% 10%, rgba(124,240,214,.15), transparent 60%),
+        var(--bg);
+      line-height:1.6;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    header{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(10px);
+      background: rgba(11,18,32,.78);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .brand{display:flex; flex-direction:column; gap:2px}
+    .brand b{font-size:16px; letter-spacing:.2px}
+    .brand span{font-size:12px; color:var(--muted)}
+    .links{display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end}
+    .links a{
+      padding:8px 10px;
+      border:1px solid transparent;
+      border-radius:999px;
+      font-size:13px;
+      color:var(--text);
+      opacity:.9;
+    }
+    .links a:hover{
+      border-color: var(--border);
+      background: rgba(255,255,255,.04);
+      text-decoration:none;
+    }
+
+    .wrap{max-width:var(--max); margin:0 auto; padding:18px}
+
+    .hero{
+      margin-top:18px;
+      padding:30px;
+      border:1px solid var(--border);
+      background: linear-gradient(135deg, rgba(18,27,46,.88), rgba(18,27,46,.55));
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(650px 240px at 25% 0%, rgba(106,167,255,.25), transparent 65%),
+        radial-gradient(520px 220px at 80% 40%, rgba(124,240,214,.18), transparent 60%);
+      pointer-events:none;
+    }
+    .hero-grid{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 860px){ .hero-grid{grid-template-columns:1fr} }
+
+    h1{
+      margin:0 0 10px 0;
+      font-size: clamp(30px, 4.2vw, 48px);
+      line-height:1.1;
+      letter-spacing:.2px;
+    }
+    .lead{margin:0 0 16px 0; color:var(--muted); max-width:75ch}
+
+    .pill-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:8px}
+    .pill{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:13px;
+      color:var(--text);
+    }
+    .pill.accent{border-color: rgba(106,167,255,.35)}
+    .pill.accent2{border-color: rgba(124,240,214,.35)}
+
+    .quick{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background: rgba(255,255,255,.03);
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .quick h3{margin:0; font-size:16px}
+    .quick ul{margin:0; padding-left:18px; color:var(--muted)}
+    .quick li{margin:6px 0}
+    .btn{
+      display:inline-block;
+      margin-top:10px;
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid rgba(124,240,214,.35);
+      background: rgba(124,240,214,.12);
+      color:var(--text);
+      font-weight:700;
+    }
+    .btn:hover{background: rgba(124,240,214,.18); text-decoration:none}
+
+    section{
+      margin-top:18px;
+      padding:22px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background: rgba(18,27,46,.62);
+      box-shadow: 0 6px 18px rgba(0,0,0,.25);
+    }
+    section h2{margin:0 0 10px 0; font-size:22px; letter-spacing:.2px}
+    section p{margin:10px 0; color:var(--muted)}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+      margin-top:12px;
+    }
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr} }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:16px;
+      background: rgba(255,255,255,.03);
+    }
+    .card h3{margin:0 0 6px 0; font-size:16px}
+    .card p{margin:0; font-size:14px}
+
+    .two-col{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      margin-top:12px;
+    }
+    @media (max-width: 900px){ .two-col{grid-template-columns:1fr} }
+
+    /* ABOUT US PHOTO */
+    .about-photo{
+      margin: 16px auto 6px auto;
+      text-align: center;
+    }
+    .about-photo img{
+      max-width: 520px;
+      width: 100%;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.45);
+    }
+    .photo-caption{
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* DONATE NOW POP-UP BANNER */
+    .donate-banner{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      width: min(980px, calc(100% - 26px));
+      z-index: 9999;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(18,27,46,0.92);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      box-shadow: 0 14px 35px rgba(0,0,0,0.45);
+    }
+    .donate-inner{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 14px 14px 16px;
+    }
+    .donate-text{display:flex; flex-direction:column; gap:2px}
+    .donate-text b{font-size: 14px; letter-spacing: 0.2px}
+    .donate-text span{font-size: 13px; opacity: 0.88; color: var(--muted)}
+
+    .donate-actions{display:flex; align-items:center; gap:10px}
+    .donate-btn{
+      display:inline-block;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 13px;
+      color: #e8eefc;
+      border: 1px solid rgba(124,240,214,0.35);
+      background: rgba(124,240,214,0.14);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .donate-btn:hover{background: rgba(124,240,214,0.20); text-decoration:none}
+    .donate-close{
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: #e8eefc;
+      border-radius: 12px;
+      width: 38px;
+      height: 38px;
+      cursor: pointer;
+    }
+    .donate-close:hover{background: rgba(255,255,255,0.10)}
+    .donate-banner.hide{
+      opacity: 0;
+      transform: translateX(-50%) translateY(18px);
+      pointer-events: none;
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+    @media (max-width: 520px){
+      .donate-inner{flex-direction: column; align-items: stretch;}
+      .donate-actions{width: 100%; justify-content: space-between;}
+      .donate-btn{width: 100%; text-align: center;}
+    }
+
+    footer{
+      margin:18px 0 30px 0;
+      color:var(--muted);
+      font-size:13px;
+      text-align:center;
+      opacity:.95;
+    }
+    .small{font-size:12px; opacity:.9}
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <b>The Ripple Project</b>
+        <span>Rhabdomyosarcoma Awareness & Fundraising • by Liam Meier & Kyle Sacks</span>
+      </div>
+      <nav class="links" aria-label="Site navigation">
+        <a href="#about">About RMS</a>
+        <a href="#project">Our Project</a>
+        <a href="#fundraiser">Fundraiser</a>
+        <a href="#us">About Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Donate Banner -->
+  <div id="donate-banner" class="donate-banner" role="dialog" aria-live="polite" aria-label="Donate now banner">
+    <div class="donate-inner">
+      <div class="donate-text">
+        <b>Donate Now</b>
+        <span>Support The Ripple Project for Wolfson Children’s Hospital.</span>
+      </div>
+
+      <div class="donate-actions">
+        <a class="donate-btn" href="https://www.gofundme.com/f/the-ripple-project-for-wolfsons-children-hospital" target="_blank" rel="noopener">
+          Go to GoFundMe →
+        </a>
+        <button class="donate-close" type="button" aria-label="Close donate banner" onclick="closeDonateBanner()">
+          ✕
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const KEY = "ripple_donate_banner_closed_until";
+      const closedUntil = Number(localStorage.getItem(KEY) || 0);
+      if (Date.now() < closedUntil) {
+        const el = document.getElementById("donate-banner");
+        if (el) el.style.display = "none";
+      }
+    })();
+
+    function closeDonateBanner() {
+      const el = document.getElementById("donate-banner");
+      if (el) el.classList.add("hide");
+      const threeDays = 3 * 24 * 60 * 60 * 1000;
+      localStorage.setItem("ripple_donate_banner_closed_until", String(Date.now() + threeDays));
+    }
+  </script>
+
+  <main class="wrap">
+    <div class="hero">
+      <div class="hero-grid">
+        <div>
+          <h1>The Ripple Project</h1>
+          <p class="lead">
+            Small actions can create big change. We started The Ripple Project to raise awareness and
+            support for rhabdomyosarcoma research and families impacted by cancer.
+          </p>
+
+          <div class="pill-row">
+            <div class="pill accent">Awareness</div>
+            <div class="pill accent2">Fundraising</div>
+            <div class="pill accent">Youth-led impact</div>
+          </div>
+
+          <a class="btn" href="https://www.gofundme.com/f/the-ripple-project-for-wolfsons-children-hospital" target="_blank" rel="noopener">Visit Our GoFundMe</a>
+          <div class="small">Thank you for your support!</div>
+        </div>
+
+        <aside class="quick" aria-label="Quick overview">
+          <h3>What we’re doing</h3>
+          <ul>
+            <li><b>Educate:</b> Explain what RMS is and why it matters</li>
+            <li><b>Raise:</b> Fundraise to support the cause</li>
+            <li><b>Inspire:</b> Motivate others to make a ripple</li>
+          </ul>
+          <div class="small">Educational site (not medical advice).</div>
+        </aside>
+      </div>
+    </div>
+
+    <section id="about">
+      <h2>What is Rhabdomyosarcoma? (Background + Basics)</h2>
+      <p>
+        Rhabdomyosarcoma (RMS) is a rare cancer that begins in cells that normally develop into skeletal
+        (voluntary) muscle. Even though it’s linked to muscle-forming cells, RMS can develop in many
+        areas of the body.
+      </p>
+      <p>
+        RMS is most commonly diagnosed in children and teens. Because it’s rare, awareness matters:
+        learning the basics and supporting research can help more families get answers and care.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Where it can appear</h3>
+          <p>Head/neck, urinary or reproductive areas, arms/legs, and the trunk.</p>
+        </div>
+        <div class="card">
+          <h3>Common signs</h3>
+          <p>A growing lump/swelling, pain, or symptoms from pressure on nearby organs.</p>
+        </div>
+        <div class="card">
+          <h3>How it’s treated</h3>
+          <p>Often with chemotherapy, surgery, and/or radiation depending on the case.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="project">
+      <h2>Our Project: Why We Started a GoFundMe</h2>
+      <p>
+        The Ripple Project began as a simple idea: if two students can take action, that action can spread.
+        Kyle and Liam started a GoFundMe to support Wolfson Children’s Hospital and raise awareness for RMS.
+      </p>
+      <p>
+        Cancer has impacted both of our families. That personal connection made this cause meaningful — and it
+        pushed us to turn concern into action. Our goal is to grow awareness, encourage donations, and remind
+        people that small steps can create real change.
+      </p>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>Our “why”</h3>
+          <p>Family experiences with cancer + a desire to help others and be part of change.</p>
+        </div>
+        <div class="card">
+          <h3>Our “how”</h3>
+          <p>Fundraising through GoFundMe, spreading awareness, and mobilizing our community.</p>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:14px;">
+        <div class="card">
+          <h3>How you can help</h3>
+          <p>Donate if you can, share the link, and talk about RMS so more people learn about it.</p>
+        </div>
+        <div class="card">
+          <h3>Ripple effect</h3>
+          <p>One post → one share → one donation → more support for families and research.</p>
+        </div>
+        <div class="card">
+          <h3>Our promise</h3>
+          <p>We’ll keep building momentum and encouraging others to create their own ripple.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="fundraiser">
+      <h2>Fundraiser</h2>
+      <p>We are raising money for Wolfson Children’s Hospital through our GoFundMe:</p>
+      <p><a href="https://www.gofundme.com/f/the-ripple-project-for-wolfsons-children-hospital" target="_blank" rel="noopener">https://www.gofundme.com/f/the-ripple-project-for-wolfsons-children-hospital</a></p>
+      <p>If you’re able to donate or share with others, it helps the ripple grow — every share counts.</p>
+    </section>
+
+    <section id="us">
+      <h2>About Kyle & Liam</h2>
+      <p>
+        Kyle Sacks and Liam Meier have been friends for over 12 years — teammates, classmates, and partners in hard work.
+        The Ripple Project is our way of using that friendship for something bigger than ourselves.
+      </p>
+
+      <div class="about-photo">
+        <img src="images/liam-kyle.png" alt="Kyle Sacks and Liam Meier, founders of The Ripple Project" />
+        <p class="photo-caption">
+          Kyle Sacks (left) and Liam Meier (right) — friends for over 12 years and co-founders of The Ripple Project.
+        </p>
+      </div>
+
+      <p>
+        Outside of this project, we stay busy with school and the things we love — weightlifting, tennis,
+        traveling, and working hard academically. We’re proud to take action together and hope our project
+        inspires others to do the same.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Friendship</h3>
+          <p>Over 12 years of friendship, teamwork, and pushing each other to improve.</p>
+        </div>
+        <div class="card">
+          <h3>Hobbies</h3>
+          <p>Weightlifting • Tennis • Traveling • Staying active and focused.</p>
+        </div>
+        <div class="card">
+          <h3>Work ethic</h3>
+          <p>We work hard in school and use our drive to create impact beyond the classroom.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div><b>The Ripple Project</b> — Rhabdomyosarcoma Awareness</div>
+      <div>Created by Liam Meier & Kyle Sacks</div>
+      <div class="small">Last updated: January 12, 2026</div>
+    </footer>
+  </main>
+</body>
+</html>
